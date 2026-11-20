@@ -14,7 +14,6 @@ import {
   Palette,
   Search,
   Settings,
-  Trash2,
   Images,
 } from "lucide-react";
 import { getStaffSession } from "@/lib/auth";
@@ -32,17 +31,16 @@ export const dynamic = "force-dynamic";
 // Modules are listed now; each becomes a link when its phase is built.
 const NAV = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard, ready: true },
-  { label: "Website Builder", href: "/admin/builder", icon: LayoutTemplate, phase: 4 },
-  { label: "Media Library", href: "/admin/media", icon: ImageIcon, phase: 2 },
+  { label: "Website Builder", href: "/admin/builder", icon: LayoutTemplate, ready: true },
+  { label: "Media Library", href: "/admin/media", icon: ImageIcon, ready: true },
   { label: "Albums", href: "/admin/albums", icon: Images, phase: 2 },
-  { label: "Categories", href: "/admin/categories", icon: FolderTree, phase: 2 },
+  { label: "Categories", href: "/admin/categories", icon: FolderTree, ready: true },
   { label: "Pages", href: "/admin/pages", icon: FileText, phase: 3 },
   { label: "Appearance", href: "/admin/appearance", icon: Palette, phase: 6 },
-  { label: "Navigation", href: "/admin/navigation", icon: Menu, phase: 6 },
+  { label: "Navigation", href: "/admin/navigation", icon: Menu, ready: true },
   { label: "Enquiries", href: "/admin/enquiries", icon: Inbox, phase: 6 },
   { label: "SEO", href: "/admin/seo", icon: Search, phase: 6 },
-  { label: "Trash", href: "/admin/trash", icon: Trash2, phase: 4 },
-  { label: "Settings", href: "/admin/settings", icon: Settings, phase: 6 },
+  { label: "Settings", href: "/admin/settings", icon: Settings, ready: true },
 ] as const;
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

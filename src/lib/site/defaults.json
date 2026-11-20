@@ -1,0 +1,162 @@
+{
+  "site": {
+    "site_name": "MomentEra",
+    "brand_accent": "Era",
+    "tagline": "Photography Studio",
+    "header_cta_label": "Book a Shoot",
+    "header_cta_href": "/#contact",
+    "footer_copyright": "© {year} MomentEra Photography Studio. All rights reserved.",
+    "seo_title": "MomentEra — Photography Studio",
+    "seo_description": "MomentEra Photography Studio",
+    "ui_labels": {
+      "brand_href": "/#home",
+      "logo_alt": "",
+      "menu_icon": "☰",
+      "menu_label": "Open navigation",
+      "close_icon": "×",
+      "close_label": "Close",
+      "play_icon": "▶",
+      "play_label": "Play {title}"
+    },
+    "header_nav": [
+      { "label": "Home", "href": "/#home" },
+      { "label": "About", "href": "/#about" },
+      { "label": "Portfolio⌄", "href": "/#portfolio" },
+      { "label": "Services", "href": "/#services" },
+      { "label": "Packages", "href": "/#films" },
+      { "label": "Contact", "href": "/#contact" }
+    ],
+    "footer_nav": [
+      { "label": "Home", "href": "/#home" },
+      { "label": "Portfolio", "href": "/#portfolio" },
+      { "label": "Services", "href": "/#services" },
+      { "label": "Contact", "href": "/#contact" }
+    ]
+  },
+  "home_sections": [
+    {
+      "section_type": "hero",
+      "title": "Hero",
+      "settings": {
+        "anchor_id": "home",
+        "eyebrow": "Photography  •  Videography  •  Films",
+        "heading": "Capturing\nLife’s Beautiful",
+        "heading_highlight": "Moments ♡",
+        "text": "Weddings, Events, Portraits, and more — beautifully captured, creatively told.",
+        "background_image_url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=88",
+        "mobile_background_image_url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85",
+        "buttons": [
+          { "label": "Explore Gallery →", "href": "#portfolio", "variant": "primary" },
+          { "label": "▷  Book a Shoot", "href": "#contact", "variant": "ghost" }
+        ],
+        "social_links": [
+          { "icon": "▧", "href": "#portfolio", "label": "Photos" },
+          { "icon": "▣", "href": "#films", "label": "Films" },
+          { "icon": "♫", "href": "#films", "label": "Audio" }
+        ],
+        "show_dots": true
+      }
+    },
+    {
+      "section_type": "feature_strip",
+      "title": "Feature strip",
+      "settings": {
+        "anchor_id": "",
+        "items": [
+          { "icon": "▧", "title": "Photography", "text": "Timeless moments" },
+          { "icon": "▣", "title": "Videography", "text": "Cinematic stories" },
+          { "icon": "♫", "title": "Audio Stories", "text": "Event highlights" },
+          { "icon": "♧", "title": "Albums", "text": "Beautiful keepsakes" }
+        ]
+      }
+    },
+    {
+      "section_type": "image_gallery",
+      "title": "Our Work",
+      "settings": {
+        "anchor_id": "portfolio",
+        "heading": "Our Work",
+        "all_label": "All",
+        "filters": [
+          { "label": "Wedding", "value": "wedding" },
+          { "label": "Pre-Wedding", "value": "prewedding" },
+          { "label": "Events", "value": "events" },
+          { "label": "Birthdays", "value": "birthday" },
+          { "label": "Portraits", "value": "portraits" },
+          { "label": "Commercial", "value": "commercial" }
+        ],
+        "items": [
+          { "title": "Wedding Stories", "subtitle": "120 Photos · 4 Videos", "category": "wedding", "glyph": "▧", "alt": "Wedding couple", "image_url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=850&q=85" },
+          { "title": "Pre-Wedding", "subtitle": "80 Photos · 2 Videos", "category": "prewedding", "glyph": "▣", "alt": "Couple outdoors", "image_url": "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=850&q=85" },
+          { "title": "Events", "subtitle": "45 Photos · 3 Videos", "category": "events", "glyph": "▧", "alt": "Celebration", "image_url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=850&q=85" },
+          { "title": "Portraits", "subtitle": "60 Photos", "category": "portraits", "glyph": "▧", "alt": "Portrait", "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=850&q=85" },
+          { "title": "Family & Birthdays", "subtitle": "75 Photos · 1 Video", "category": "birthday", "glyph": "▧", "alt": "Birthday", "image_url": "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=850&q=85" },
+          { "title": "Commercial", "subtitle": "35 Photos · 2 Videos", "category": "commercial", "glyph": "▧", "alt": "Product photography", "image_url": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=850&q=85" }
+        ]
+      }
+    },
+    {
+      "section_type": "video_gallery",
+      "title": "Featured Films",
+      "settings": {
+        "anchor_id": "films",
+        "heading": "Featured Films",
+        "subtitle": "Watch our cinematic wedding and event films",
+        "placeholder_message": "Demo preview: add a YouTube, Vimeo or direct video URL to play this film.",
+        "items": [
+          { "title": "Rohan & Priya – Wedding Film", "duration": "04:32", "video_url": "", "alt": "Wedding film", "thumbnail_url": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=85" },
+          { "title": "Pre-Wedding – Goa", "duration": "03:18", "video_url": "", "alt": "Pre wedding", "thumbnail_url": "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=85" },
+          { "title": "Aarohi’s 5th Birthday", "duration": "02:45", "video_url": "", "alt": "Birthday film", "thumbnail_url": "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=900&q=85" }
+        ],
+        "button": { "label": "View All Videos →", "href": "#portfolio", "variant": "ghost" }
+      }
+    },
+    {
+      "section_type": "about",
+      "title": "About",
+      "settings": {
+        "anchor_id": "about",
+        "eyebrow": "A little about us",
+        "heading": "Every Picture\nTells a Story",
+        "text": "We are a passionate team of photographers and storytellers, specializing in weddings, events, portraits and more. Our goal is to turn your special moments into lasting memories.",
+        "image_url": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1100&q=85",
+        "image_alt": "Photography camera",
+        "stats": [
+          { "value": "500+", "label": "Projects" },
+          { "value": "300+", "label": "Happy Clients" },
+          { "value": "8+", "label": "Years Experience" }
+        ],
+        "button": { "label": "Know More →", "href": "#contact", "variant": "primary" }
+      }
+    },
+    {
+      "section_type": "services",
+      "title": "Our Services",
+      "settings": {
+        "anchor_id": "services",
+        "heading": "Our Services",
+        "subtitle": "From intimate portraits to grand celebrations, we capture it all.",
+        "items": [
+          { "icon": "♡", "title": "Wedding", "text": "Complete wedding coverage", "alt": "Wedding", "image_url": "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=700&q=85" },
+          { "icon": "♧", "title": "Pre-Wedding", "text": "Beautiful couple shoots", "alt": "Pre-wedding", "image_url": "https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=700&q=85" },
+          { "icon": "✧", "title": "Events", "text": "Birthdays, anniversaries and more", "alt": "Events", "image_url": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=700&q=85" },
+          { "icon": "♙", "title": "Portraits", "text": "Individual and family portraits", "alt": "Portraits", "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85" },
+          { "icon": "◇", "title": "Commercial", "text": "Product and brand photography", "alt": "Commercial", "image_url": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=85" },
+          { "icon": "▷", "title": "Cinematic Films", "text": "Storytelling through films", "alt": "Films", "image_url": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=700&q=85" }
+        ]
+      }
+    },
+    {
+      "section_type": "cta",
+      "title": "Call to action",
+      "settings": {
+        "anchor_id": "contact",
+        "eyebrow": "Let's make memories",
+        "heading": "Let’s Capture\nYour Next Story",
+        "text": "Book your shoot today and let us create memories that last forever.",
+        "background_image_url": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1800&q=85",
+        "button": { "label": "Book a Shoot →", "href": "mailto:hello@momentera.example?subject=Photography%20Enquiry", "variant": "primary" }
+      }
+    }
+  ]
+}

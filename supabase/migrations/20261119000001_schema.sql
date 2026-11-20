@@ -1,5 +1,5 @@
 -- Photography website builder: core schema
--- Public routes read published revisions only; page_sections is draft data.
+-- Simple model: edits update rows directly. No revisions, audit log or trash.
 
 create extension if not exists pgcrypto;
 
@@ -9,7 +9,6 @@ create extension if not exists pgcrypto;
 create type public.app_role as enum ('admin', 'editor');
 create type public.media_type as enum ('image', 'video', 'audio');
 create type public.validation_status as enum ('valid', 'needs_permission', 'unsupported', 'pending');
-create type public.page_status as enum ('draft', 'published', 'archived');
 create type public.enquiry_status as enum ('new', 'contacted', 'booked', 'closed', 'spam');
 create type public.nav_location as enum ('header', 'footer');
 
@@ -103,14 +102,12 @@ create table public.media_items (
   category_id uuid references public.categories (id) on delete set null,
   is_published boolean not null default false,
   validation_status public.validation_status not null default 'pending',
-  deleted_at timestamptz,
-  deleted_by uuid references auth.users (id) on delete set null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
 create index media_items_category_idx on public.media_items (category_id);
-create index media_items_public_idx on public.media_items (is_published) where deleted_at is null;
+create index media_items_public_idx on public.media_items (is_published);
 
 create trigger media_items_updated_at
   before update on public.media_items
@@ -128,8 +125,6 @@ create table public.albums (
   category_id uuid references public.categories (id) on delete set null,
   event_date date,
   is_published boolean not null default false,
-  deleted_at timestamptz,
-  deleted_by uuid references auth.users (id) on delete set null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -150,18 +145,16 @@ create table public.album_media (
 create index album_media_media_idx on public.album_media (media_item_id);
 
 -- ---------------------------------------------------------------------------
--- Pages, draft sections, revisions, publications
+-- Pages and their sections
 -- ---------------------------------------------------------------------------
 create table public.website_pages (
   id uuid primary key default gen_random_uuid(),
   slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
   title text not null,
-  status public.page_status not null default 'draft',
-  published_revision_id uuid, -- FK added after page_revisions exists
+  is_published boolean not null default false,
   seo_title text,
   seo_description text,
   og_image_url text check (og_image_url is null or og_image_url ~* '^https://'),
-  deleted_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -179,42 +172,15 @@ create table public.page_sections (
   is_visible boolean not null default true,
   settings jsonb not null default '{}'::jsonb check (jsonb_typeof(settings) = 'object'),
   responsive_settings jsonb not null default '{}'::jsonb check (jsonb_typeof(responsive_settings) = 'object'),
-  deleted_at timestamptz,
-  deleted_by uuid references auth.users (id) on delete set null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
-create index page_sections_page_idx on public.page_sections (page_id, position) where deleted_at is null;
+create index page_sections_page_idx on public.page_sections (page_id, position);
 
 create trigger page_sections_updated_at
   before update on public.page_sections
   for each row execute function public.set_updated_at();
-
-create table public.page_revisions (
-  id uuid primary key default gen_random_uuid(),
-  page_id uuid not null references public.website_pages (id) on delete cascade,
-  version_number integer not null,
-  configuration jsonb not null,
-  publish_note text,
-  created_by uuid references auth.users (id) on delete set null,
-  created_at timestamptz not null default now(),
-  unique (page_id, version_number)
-);
-
-alter table public.website_pages
-  add constraint website_pages_published_revision_fk
-  foreign key (published_revision_id) references public.page_revisions (id) on delete set null;
-
-create table public.website_publications (
-  id uuid primary key default gen_random_uuid(),
-  page_id uuid not null references public.website_pages (id) on delete cascade,
-  revision_id uuid not null references public.page_revisions (id) on delete cascade,
-  published_at timestamptz not null default now(),
-  published_by uuid references auth.users (id) on delete set null
-);
-
-create index website_publications_page_idx on public.website_publications (page_id, published_at desc);
 
 -- ---------------------------------------------------------------------------
 -- Navigation
@@ -247,18 +213,3 @@ create table public.enquiries (
 );
 
 create index enquiries_rate_idx on public.enquiries (ip_hash, created_at desc);
-
--- ---------------------------------------------------------------------------
--- Audit log (written by security-definer functions)
--- ---------------------------------------------------------------------------
-create table public.audit_log (
-  id uuid primary key default gen_random_uuid(),
-  actor_id uuid references auth.users (id) on delete set null,
-  action text not null,
-  entity_type text not null,
-  entity_id uuid,
-  details jsonb not null default '{}'::jsonb,
-  created_at timestamptz not null default now()
-);
-
-create index audit_log_created_idx on public.audit_log (created_at desc);

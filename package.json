@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:sql": "bash scripts/build-db-sql.sh",
+    "db:reset": "supabase db reset --linked"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

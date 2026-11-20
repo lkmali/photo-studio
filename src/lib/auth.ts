@@ -2,6 +2,7 @@ import "server-only";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Profile } from "@/types/database";
+import { grantAdminRole, isConfiguredAdmin } from "@/lib/bootstrap-admin";
 
 export type StaffSession =
   | { status: "signed_out" }
@@ -22,7 +23,28 @@ export async function getStaffSession(): Promise<StaffSession> {
     .eq("id", user.id)
     .single<Profile>();
 
-  if (!profile?.role) return { status: "no_role", email: user.email };
+  if (!profile?.role) {
+    // App-level role: the account in ADMIN_EMAIL is always admin. Sync it to
+    // the database so RLS policies (which read profiles.role) allow its writes.
+    if (isConfiguredAdmin(user.email)) {
+      try {
+        await grantAdminRole(user.id);
+        return {
+          status: "staff",
+          email: user.email,
+          profile: {
+            id: user.id,
+            display_name: profile?.display_name ?? user.email ?? null,
+            created_at: profile?.created_at ?? new Date().toISOString(),
+            role: "admin",
+          },
+        };
+      } catch (e) {
+        console.error("Auto-granting admin role from ADMIN_EMAIL failed", e);
+      }
+    }
+    return { status: "no_role", email: user.email };
+  }
   return { status: "staff", email: user.email, profile: { ...profile, role: profile.role } };
 }
 

@@ -23,6 +23,13 @@ export function isBootstrapCredentials(email: string, password: string) {
   return emailOk && passwordOk;
 }
 
+/** True when this signed-in email is the admin named in ADMIN_EMAIL. */
+export function isConfiguredAdmin(email: string | undefined) {
+  const envEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  if (!envEmail || !email) return false;
+  return safeEqual(email.trim().toLowerCase(), envEmail);
+}
+
 /** Creates the bootstrap user in Supabase Auth if it does not exist yet. */
 export async function createBootstrapUser(email: string, password: string) {
   const admin = createAdminClient();
